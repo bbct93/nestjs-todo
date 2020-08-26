@@ -10,7 +10,7 @@ import {
 @Injectable()
 export class ValidationPipe implements PipeTransform<any>{
   // value 是当前处理的参数，metatype是属性的元类型
-  async transform(value: any, {metatype}: ArgumentMetadata): any {
+  async transform(value: any, { metatype }: ArgumentMetadata) {
     console.log('进入全局管道...');
     if (!metatype || !this.toValidate(metatype)) {
       return value

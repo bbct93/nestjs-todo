@@ -21,6 +21,7 @@ export class HttpExceptionFiler implements ExceptionFilter {
     const status = exception instanceof HttpException ? exception.getStatus() : HttpStatus.INTERNAL_SERVER_ERROR;
 
     const message = exception.message;
+    const errorMsg = exception.getResponse()[Object.keys(exception.getResponse())[0]];
 
     const msgLog = {
       // 错误状态码
@@ -29,7 +30,7 @@ export class HttpExceptionFiler implements ExceptionFilter {
       timestamp: new Date().toISOString(),
       // 错误路由
       path: request.url,
-      message: '请求失败',
+      message: errorMsg,
       // 错误消息内容体(争取和拦截器中定义的响应体一样)
       data: message
     };
